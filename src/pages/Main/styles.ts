@@ -180,3 +180,24 @@ export const StarredRepos = styled.div`
     }
   }
 `;
+
+export const MapView = styled.div`
+  margin-top: 36px;
+
+  h1 {
+    font-size: 36px;
+    color: #3a3a3a;
+    line-height: 32px;
+
+    max-width: 580px;
+    margin: 36px 0 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    svg {
+      margin-right: 4px;
+    }
+  }
+`;

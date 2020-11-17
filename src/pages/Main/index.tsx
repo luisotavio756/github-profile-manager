@@ -1,15 +1,26 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import Geocode from 'react-geocode';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { LeafletMouseEvent } from 'leaflet';
 import {
   FiAlignLeft,
   FiChevronRight,
   FiLink,
+  FiMapPin,
   FiSearch,
   FiStar,
   FiUser,
   FiUsers,
 } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
-import { Title, Form, Profile, Container, StarredRepos } from './styles';
+import {
+  Title,
+  Form,
+  Profile,
+  Container,
+  StarredRepos,
+  MapView,
+} from './styles';
 import Logo from '../../assets/img/logo.svg';
 import api from '../../services/api';
 import { useToast } from '../../hooks/toast';
@@ -45,6 +56,7 @@ const Main: React.FC = () => {
   const { addToast } = useToast();
   const [starredRepos, setStarredRepos] = useState<IRepository[]>([]);
   const [user, setUser] = useState<IUser>({} as IUser);
+  const [position, setPosition] = useState<[number, number]>([0, 0]);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = useCallback(
@@ -59,21 +71,68 @@ const Main: React.FC = () => {
           `/users/${data.user}/starred`,
         );
 
+        const address = findUser.data.location;
+
         setStarredRepos(starred.data);
         setUser(findUser.data);
+
+        if (!address) {
+          setLoading(false);
+
+          addToast({
+            type: 'info',
+            title: 'Endereço inválido ou vazio!',
+            description:
+              'Infelizmente não podemos buscar o endereço do usuário. A localização informada por ele está vazia ou inválida',
+          });
+
+          return;
+        }
+
+        Geocode.fromAddress(`${address}`)
+          .then(
+            response => {
+              console.log(response);
+
+              const { lat, lng } = response.results[0].geometry.location;
+
+              setPosition([lat, lng]);
+            },
+            error => {
+              addToast({
+                type: 'error',
+                title: 'Ocorreu um erro!',
+                description: 'Ocorreu um erro ao buscar o endereço do usuário',
+              });
+            },
+          )
+          .finally(() => {
+            setLoading(false);
+          });
       } catch (error) {
+        setLoading(false);
+
         addToast({
           type: 'error',
           title: 'Ocorreu um erro!',
           description:
             'Não foi possível buscar o usuário, verifique o nome de usuário e tente novamente.',
         });
-      } finally {
-        setLoading(false);
       }
     },
     [addToast],
   );
+
+  useEffect(() => {
+    Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_KEY || '');
+
+    // set response language. Defaults to english.
+    Geocode.setLanguage('en');
+
+    // set response region. Its optional.
+    // A Geocoding request with region=es (Spain) will return the Spanish city.
+    Geocode.setRegion('es');
+  }, []);
 
   return (
     <Container>
@@ -145,6 +204,27 @@ const Main: React.FC = () => {
               </a>
             ))}
           </StarredRepos>
+          <MapView>
+            <h1>
+              <FiMapPin /> Location
+            </h1>
+            <MapContainer
+              center={position}
+              zoom={13}
+              scrollWheelZoom={false}
+              style={{ height: 200 }}
+            >
+              <TileLayer
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              <Marker position={position}>
+                <Popup>
+                  A pretty CSS3 popup. <br /> Easily customizable.
+                </Popup>
+              </Marker>
+            </MapContainer>
+          </MapView>
         </>
       )}
       {loading && <div className="loading" />}
