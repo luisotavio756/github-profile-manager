@@ -53,4 +53,15 @@ export default createGlobalStyle`
     transition: opacity 0.3s;
   }
 
+  div.loading {
+    margin: 24px auto 0;
+    width: 2.6em;
+    height: 2.6em;
+    border: .4em solid rgba(0, 0, 0, 0.2);
+    border-left: .4em solid #8bb03e;
+    border-radius: 50%;
+    animation: load8 1.1s infinite linear;
+    transition: opacity 0.3s;
+  }
+
 `;

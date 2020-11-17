@@ -1,10 +1,17 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { shade } from 'polished';
 import { Form as Unform } from '@unform/web';
 
-interface FormProps {
-  hasError: boolean;
-}
+export const Container = styled.div`
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+
+  img {
+    width: 180px;
+    height: auto;
+  }
+`;
 
 export const Title = styled.h1`
   font-size: 48px;
@@ -16,8 +23,6 @@ export const Title = styled.h1`
 `;
 
 export const Form = styled(Unform)`
-  max-width: 700px;
-
   display: flex;
 
   .submit-button {
@@ -38,9 +43,75 @@ export const Form = styled(Unform)`
   }
 `;
 
-export const Repositories = styled.div`
+export const Profile = styled.div`
   margin-top: 80px;
-  max-width: 700px;
+
+  header {
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+    }
+
+    div {
+      margin-left: 24px;
+
+      strong {
+        font-size: 32px;
+        color: #3d3d4d;
+      }
+
+      p {
+        font-size: 14px;
+        color: #737390;
+        margin-top: 4px;
+      }
+
+      a {
+        font-size: 14px;
+        color: #737390;
+
+        &:hover {
+          color: ${shade('0.2', '#737390')};
+        }
+      }
+    }
+  }
+
+  ul {
+    display: flex;
+    list-style: none;
+    margin-top: 40px;
+
+    li + li {
+      margin-left: 80px;
+    }
+
+    li {
+      strong {
+        display: block;
+        font-size: 36px;
+        color: #3d3d4d;
+
+        svg {
+          margin-right: 4px;
+        }
+      }
+
+      span {
+        margin-top: 4px;
+        display: block;
+        color: #6c6c80;
+      }
+    }
+  }
+`;
+
+export const StarredRepos = styled.div`
+  margin-top: 36px;
 
   a {
     background: #fff;
@@ -87,10 +158,4 @@ export const Repositories = styled.div`
       color: #a8a8b3;
     }
   }
-`;
-
-export const Error = styled.span`
-  display: block;
-  color: #c53030;
-  margin-top: 8px;
 `;
