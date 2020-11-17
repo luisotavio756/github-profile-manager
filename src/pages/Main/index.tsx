@@ -4,6 +4,7 @@ import {
   FiChevronRight,
   FiLink,
   FiSearch,
+  FiStar,
   FiUser,
   FiUsers,
 } from 'react-icons/fi';
@@ -125,8 +126,16 @@ const Main: React.FC = () => {
             </ul>
           </Profile>
           <StarredRepos>
+            <h1>
+              <FiStar /> Starred Repositories
+            </h1>
             {starredRepos.map(repository => (
-              <a key={repository.full_name} href={repository.html_url}>
+              <a
+                key={repository.full_name}
+                href={repository.html_url}
+                target="_blank"
+                rel="noreferrer"
+              >
                 <img src={repository.owner.avatar_url} alt="Avatar" />
                 <div>
                   <strong>{repository.full_name}</strong>
