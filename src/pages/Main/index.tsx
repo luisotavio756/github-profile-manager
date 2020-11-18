@@ -4,12 +4,14 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { LeafletMouseEvent } from 'leaflet';
 import {
   FiAlignLeft,
+  FiBook,
   FiChevronRight,
   FiLink,
   FiMapPin,
   FiSearch,
   FiStar,
   FiUser,
+  FiUserCheck,
   FiUsers,
 } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
@@ -28,13 +30,15 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 interface IUser {
-  id: number;
   name: string;
+  login: string;
   avatar_url: string;
   url: string;
   bio: string;
   location: string;
   followers: number;
+  following: number;
+  public_repos: number;
 }
 
 interface IRepository {
@@ -137,7 +141,7 @@ const Main: React.FC = () => {
   return (
     <Container>
       <img src={Logo} alt="" />
-      <Title>Explore perfis no Github</Title>
+      <Title>Manage Profiles on Github</Title>
       <Form ref={formRef} onSubmit={handleSubmit}>
         <Input
           name="user"
@@ -147,7 +151,7 @@ const Main: React.FC = () => {
           className="user-input"
         />
         <Button type="submit" className="submit-button">
-          <FiSearch /> Buscar
+          <FiSearch /> Find
         </Button>
       </Form>
       {!!Object.keys(user).length && !loading && (
@@ -156,7 +160,10 @@ const Main: React.FC = () => {
             <header>
               <img src={user.avatar_url} alt="" />
               <div>
-                <strong>{user.name}</strong>
+                <div className="name">
+                  <strong>{user.name}</strong>
+                  <p>{user.login}</p>
+                </div>
                 <p>
                   <FiAlignLeft />
                   {user.bio}
@@ -175,12 +182,16 @@ const Main: React.FC = () => {
                 <span>Follows</span>
               </li>
               <li>
-                <strong>10</strong>
-                <span>Forks</span>
+                <strong>
+                  <FiUserCheck /> {user.following}
+                </strong>
+                <span>Following</span>
               </li>
               <li>
-                <strong>10</strong>
-                <span>Issues abertas</span>
+                <strong>
+                  <FiBook /> {user.public_repos}
+                </strong>
+                <span>Public Repos</span>
               </li>
             </ul>
           </Profile>
@@ -203,6 +214,11 @@ const Main: React.FC = () => {
                 <FiChevronRight size={20} />
               </a>
             ))}
+            {starredRepos.length === 0 && (
+              <div className="not-repos">
+                <p>Nothing starred repositories</p>
+              </div>
+            )}
           </StarredRepos>
           <MapView>
             <h1>

@@ -6,6 +6,8 @@ export const Container = styled.div`
   max-width: 700px;
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
+  padding: 40px 20px;
 
   img {
     width: 180px;
@@ -56,12 +58,19 @@ export const Profile = styled.div`
       border-radius: 50%;
     }
 
-    div {
+    > div {
       margin-left: 24px;
 
-      strong {
-        font-size: 32px;
-        color: #3d3d4d;
+      .name {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        strong {
+          font-size: 32px;
+          color: #3d3d4d;
+          margin-right: 4px;
+        }
       }
 
       p {
@@ -83,10 +92,20 @@ export const Profile = styled.div`
         }
       }
     }
+
+    @media screen and (max-width: 790px) {
+      flex-direction: column;
+
+      > div {
+        margin-top: 16px;
+        margin-left: 0;
+      }
+    }
   }
 
   ul {
     display: flex;
+
     list-style: none;
     margin-top: 40px;
 
@@ -94,9 +113,18 @@ export const Profile = styled.div`
       margin-left: 80px;
     }
 
+    @media screen and (max-width: 790px) {
+      li + li {
+        margin-left: 0;
+      }
+      justify-content: space-between;
+    }
+
     li {
       strong {
-        display: block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         font-size: 36px;
         color: #3d3d4d;
 
@@ -131,6 +159,13 @@ export const StarredRepos = styled.div`
 
     svg {
       margin-right: 4px;
+    }
+  }
+
+  .not-repos {
+    p {
+      font-size: 16px;
+      color: #777;
     }
   }
 

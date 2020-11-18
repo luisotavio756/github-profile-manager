@@ -22,13 +22,6 @@ export default createGlobalStyle`
     cursor: pointer;
   }
 
-  #root {
-    max-width: 960px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 40px 20px;
-  }
-
   @keyframes load8 {
     0% {
       transform: rotate(0deg);
