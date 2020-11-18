@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Geocode from 'react-geocode';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { LeafletMouseEvent } from 'leaflet';
 import {
   FiAlignLeft,
   FiBook,
@@ -100,8 +99,6 @@ const Main: React.FC = () => {
         Geocode.fromAddress(`${address}`)
           .then(
             response => {
-              console.log(response);
-
               const { lat, lng } = response.results[0].geometry.location;
 
               setPosition([lat, lng]);
@@ -214,7 +211,7 @@ const Main: React.FC = () => {
               </li>
             </ul>
           </Profile>
-          <StarredRepos>
+          <StarredRepos theme={theme}>
             <h1>
               <FiStar /> Starred Repositories
             </h1>

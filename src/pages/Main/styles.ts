@@ -2,6 +2,10 @@ import styled from 'styled-components';
 import { shade } from 'polished';
 import { Form as Unform } from '@unform/web';
 
+interface IStarredRepositoriesProps {
+  theme: string;
+}
+
 export const Container = styled.div`
   max-width: 700px;
   display: flex;
@@ -174,7 +178,7 @@ export const Profile = styled.div`
   }
 `;
 
-export const StarredRepos = styled.div`
+export const StarredRepos = styled.div<IStarredRepositoriesProps>`
   margin-top: 36px;
 
   h1 {
@@ -203,7 +207,7 @@ export const StarredRepos = styled.div`
 
   a {
     position: relative;
-    background: #fff;
+    background: ${props => (props.theme === 'light' ? '#fff' : '#444')};
     border-radius: 5px;
     width: 100%;
     padding: 24px;
@@ -243,7 +247,6 @@ export const StarredRepos = styled.div`
 
       strong {
         font-size: 18px;
-        color: #3d3d4d;
       }
 
       p {
@@ -255,6 +258,28 @@ export const StarredRepos = styled.div`
     svg {
       margin-left: auto;
       color: #a8a8b3;
+    }
+
+    @media screen and (max-width: 790px) {
+      img {
+        width: 48px;
+        height: 48px;
+      }
+
+      div {
+        strong {
+          font-size: 14px;
+        }
+
+        p {
+          font-size: 12px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+        }
+      }
     }
   }
 `;
