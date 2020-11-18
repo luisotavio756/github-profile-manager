@@ -1,7 +1,15 @@
-import { createGlobalStyle } from 'styled-components';
-import githubBackground from '../assets/img/background.svg';
+import { createGlobalStyle, DefaultTheme } from 'styled-components';
 
-export default createGlobalStyle`
+interface IBodyProps extends DefaultTheme {
+  theme: {
+    body: string;
+    text: string;
+    title: string;
+    background: string;
+  };
+}
+
+export default createGlobalStyle<IBodyProps>`
   * {
     margin: 0;
     padding: 0;
@@ -10,12 +18,20 @@ export default createGlobalStyle`
   }
 
   body {
-    background: #F0F0F5 url(${githubBackground}) no-repeat 70% top;
+    background:${({ theme }) => theme.background};
     -webkit-font-smoothing: antialiased;
   }
 
   body, button, input {
     font-family: 'Poppins', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6, strong {
+    color: ${({ theme }) => theme.title};
+  }
+
+  p, span, a {
+    color: ${({ theme }) => theme.text};
   }
 
   button {

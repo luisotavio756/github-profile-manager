@@ -8,16 +8,51 @@ export const Container = styled.div`
   flex-direction: column;
   margin: 0 auto;
   padding: 40px 20px;
+  position: relative;
 
   img {
     width: 180px;
     height: auto;
   }
+
+  .button-switch-theme {
+    background: transparent;
+    border: none;
+    position: absolute;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+    font-weight: 600;
+
+    svg {
+      margin-right: 4px;
+    }
+
+    &.switch-to-dark {
+      color: #fff;
+
+      &:hover {
+        color: ${shade('0.2', '#fff')};
+        border-bottom: 2px solid ${shade('0.2', '#fff')};
+      }
+    }
+
+    &.switch-to-light {
+      color: #3a3a3a;
+
+      &:hover {
+        color: ${shade('0.2', '#3a3a3a')};
+        border-bottom: 2px solid ${shade('0.2', '#3a3a3a')};
+      }
+    }
+  }
 `;
 
 export const Title = styled.h1`
   font-size: 48px;
-  color: #3a3a3a;
   line-height: 56px;
 
   max-width: 580px;
@@ -68,14 +103,12 @@ export const Profile = styled.div`
 
         strong {
           font-size: 32px;
-          color: #3d3d4d;
           margin-right: 4px;
         }
       }
 
       p {
         font-size: 14px;
-        color: #737390;
         margin-top: 4px;
 
         svg {
@@ -85,7 +118,6 @@ export const Profile = styled.div`
 
       a {
         font-size: 14px;
-        color: #737390;
 
         &:hover {
           color: ${shade('0.2', '#737390')};
@@ -137,7 +169,6 @@ export const Profile = styled.div`
       span {
         margin-top: 4px;
         display: block;
-        color: #6c6c80;
       }
     }
   }
@@ -171,6 +202,7 @@ export const StarredRepos = styled.div`
   }
 
   a {
+    position: relative;
     background: #fff;
     border-radius: 5px;
     width: 100%;
@@ -184,7 +216,7 @@ export const StarredRepos = styled.div`
     &::before {
       position: absolute;
       height: 80%;
-      width: 2.4px;
+      width: 2.6px;
       left: 0;
       top: 10%;
       content: '';

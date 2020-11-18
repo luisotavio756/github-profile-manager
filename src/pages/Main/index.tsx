@@ -8,8 +8,10 @@ import {
   FiChevronRight,
   FiLink,
   FiMapPin,
+  FiMoon,
   FiSearch,
   FiStar,
+  FiSun,
   FiUser,
   FiUserCheck,
   FiUsers,
@@ -28,6 +30,7 @@ import api from '../../services/api';
 import { useToast } from '../../hooks/toast';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import { useTheme } from '../../hooks/theme';
 
 interface IUser {
   name: string;
@@ -58,6 +61,7 @@ interface IFormData {
 const Main: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
+  const { toggleTheme, theme } = useTheme();
   const [starredRepos, setStarredRepos] = useState<IRepository[]>([]);
   const [user, setUser] = useState<IUser>({} as IUser);
   const [position, setPosition] = useState<[number, number]>([0, 0]);
@@ -139,7 +143,22 @@ const Main: React.FC = () => {
   }, []);
 
   return (
-    <Container className="dark-mode">
+    <Container>
+      <button
+        className={`button-switch-theme switch-to-${theme}`}
+        type="button"
+        onClick={toggleTheme}
+      >
+        {theme === 'light' ? (
+          <>
+            <FiMoon /> Dark mode
+          </>
+        ) : (
+          <>
+            <FiSun /> Light mode
+          </>
+        )}
+      </button>
       <img src={Logo} alt="" />
       <Title>Manage Profiles on Github</Title>
       <Form ref={formRef} onSubmit={handleSubmit}>
