@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Geocode from 'react-geocode';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import GitHubButton from 'react-github-btn';
 import {
   FiAlignLeft,
   FiBook,
@@ -222,12 +223,25 @@ const Main: React.FC = () => {
                 target="_blank"
                 rel="noreferrer"
               >
-                <img src={repository.owner.avatar_url} alt="Avatar" />
-                <div>
-                  <strong>{repository.full_name}</strong>
-                  <p>{repository.description}</p>
+                <div className="github-button">
+                  <GitHubButton
+                    href={`https://github.com/${repository.full_name}`}
+                    data-color-scheme="no-preference: light; light: dark; dark: light;"
+                    data-icon="octicon-star"
+                    data-show-count
+                    aria-label={`Star ${repository.full_name} on GitHub`}
+                  >
+                    Star
+                  </GitHubButton>
                 </div>
-                <FiChevronRight size={20} />
+                <div className="content">
+                  <img src={repository.owner.avatar_url} alt="Avatar" />
+                  <div>
+                    <strong>{repository.full_name}</strong>
+                    <p>{repository.description}</p>
+                  </div>
+                  <FiChevronRight size={20} />
+                </div>
               </a>
             ))}
             {starredRepos.length === 0 && (
