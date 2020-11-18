@@ -8,16 +8,16 @@ interface IToastProps {
 
 const toastTypeVariations = {
   info: css`
-    background: #ebf8ff;
-    color: #3172b7;
+    background: #ebf8ff !important;
+    color: #3172b7 !important;
   `,
   success: css`
-    background: #e6fffa;
-    color: #2e656a;
+    background: #e6fffa !important;
+    color: #2e656a !important;
   `,
   error: css`
-    background: #fddede;
-    color: #c53030;
+    background: #fddede !important;
+    color: #c53030 !important;
   `,
 };
 
@@ -44,10 +44,12 @@ export const Container = styled(animated.div)<IToastProps>`
     flex: 1;
 
     strong {
+      color: #242424 !important;
       font-weight: 600;
     }
 
     p {
+      color: #444;
       margin-top: 4px;
       font-size: 14px;
       opacity: 0.8;

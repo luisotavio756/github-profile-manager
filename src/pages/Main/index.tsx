@@ -69,6 +69,16 @@ const Main: React.FC = () => {
 
   const handleSubmit = useCallback(
     async (data: IFormData) => {
+      if (data.user) {
+        addToast({
+          type: 'info',
+          title: 'Field required!',
+          description: 'Plese, enter the Github username to query data.',
+        });
+
+        return;
+      }
+
       setLoading(true);
       setUser({} as IUser);
 
@@ -89,9 +99,8 @@ const Main: React.FC = () => {
 
           addToast({
             type: 'info',
-            title: 'Endereço inválido ou vazio!',
-            description:
-              'Infelizmente não podemos buscar o endereço do usuário. A localização informada por ele está vazia ou inválida',
+            title: 'Address invalid or empty!',
+            description: `Sorry! We can't search the user address with a invalid address stored by he.`,
           });
 
           return;

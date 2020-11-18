@@ -4,9 +4,9 @@ import { ThemeProvider } from './theme';
 import { ToastProvider } from './toast';
 
 const AppProvider: React.FC = ({ children }) => (
-  <ThemeProvider>
-    <ToastProvider>{children}</ToastProvider>
-  </ThemeProvider>
+  <ToastProvider>
+    <ThemeProvider>{children}</ThemeProvider>
+  </ToastProvider>
 );
 
 export default AppProvider;

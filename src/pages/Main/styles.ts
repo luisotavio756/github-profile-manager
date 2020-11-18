@@ -57,7 +57,7 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h1`
-  font-size: 48px;
+  font-size: 2.4em;
   line-height: 56px;
 
   max-width: 580px;
