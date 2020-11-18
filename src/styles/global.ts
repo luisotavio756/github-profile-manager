@@ -56,7 +56,7 @@ export default createGlobalStyle<IBodyProps>`
     width: 8em;
     height: 8em;
     border: .7em solid rgba(0, 0, 0, 0.2);
-    border-left: .7em solid #b70710;
+    border-left: .7em solid #8bb03e;
     border-radius: 50%;
     animation: load8 1.1s infinite linear;
     transition: opacity 0.3s;
