@@ -117,6 +117,7 @@ export const Profile = styled.div`
       li + li {
         margin-left: 0;
       }
+
       justify-content: space-between;
     }
 
@@ -126,7 +127,7 @@ export const Profile = styled.div`
         justify-content: center;
         align-items: center;
         font-size: 36px;
-        color: #3d3d4d;
+        color: #8bb03e;
 
         svg {
           margin-right: 4px;
@@ -147,7 +148,7 @@ export const StarredRepos = styled.div`
 
   h1 {
     font-size: 36px;
-    color: #3a3a3a;
+    color: #8bb03e;
     line-height: 32px;
 
     max-width: 580px;
@@ -179,6 +180,16 @@ export const StarredRepos = styled.div`
     text-decoration: none;
     align-items: center;
     transition: transform 0.2s linear;
+
+    &::before {
+      position: absolute;
+      height: 80%;
+      width: 2.4px;
+      left: 0;
+      top: 10%;
+      content: '';
+      background: #8bb03e;
+    }
 
     &:hover {
       transform: translateX(10px);
@@ -221,10 +232,9 @@ export const MapView = styled.div`
 
   h1 {
     font-size: 36px;
-    color: #3a3a3a;
+    color: #8bb03e;
     line-height: 32px;
 
-    max-width: 580px;
     margin: 36px 0 24px;
 
     display: flex;

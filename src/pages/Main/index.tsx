@@ -139,7 +139,7 @@ const Main: React.FC = () => {
   }, []);
 
   return (
-    <Container>
+    <Container className="dark-mode">
       <img src={Logo} alt="" />
       <Title>Manage Profiles on Github</Title>
       <Form ref={formRef} onSubmit={handleSubmit}>
