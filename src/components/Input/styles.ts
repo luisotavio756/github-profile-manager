@@ -42,6 +42,7 @@ export const Container = styled.div<IContainerProps>`
     props.isFilled &&
     css`
       color: #8bb03e;
+      border-color: #8bb03e;
     `}
 
   input {

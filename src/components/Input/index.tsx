@@ -47,6 +47,7 @@ const Input: React.FC<IInputProps> = ({
   }, [fieldName, registerField]);
   return (
     <Container
+      data-testid="input-container"
       style={containerStyle}
       isErrored={!!error}
       isFocus={isFocus}
