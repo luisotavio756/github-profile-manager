@@ -35,7 +35,7 @@
 $ git clone https://github.com/luisotavio756/github-profile-manager.git
 
 # Go into the repository
-$ cd github-profile-manager/frontend
+$ cd github-profile-manager
 
 # Install packages
 $ yarn install or npm install
