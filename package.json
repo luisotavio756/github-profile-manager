@@ -54,6 +54,7 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/react-hooks": "^3.4.2",
     "@types/leaflet": "^1.5.19",
     "@types/react-geocode": "^0.2.0",
     "@types/react-router-dom": "^5.1.6",
