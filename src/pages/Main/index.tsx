@@ -36,7 +36,7 @@ interface IUser {
   name: string;
   login: string;
   avatar_url: string;
-  url: string;
+  html_url: string;
   bio: string;
   location: string;
   followers: number;
@@ -196,10 +196,10 @@ const Main: React.FC = () => {
                 </div>
                 <p>
                   <FiAlignLeft />
-                  {user.bio}
+                  {user.bio || 'Without description'}
                 </p>
-                <a href={user.url} target="_blank" rel="noreferrer">
-                  <FiLink /> {user.url}
+                <a href={user.html_url} target="_blank" rel="noreferrer">
+                  <FiLink /> {user.html_url}
                 </a>
               </div>
             </header>
