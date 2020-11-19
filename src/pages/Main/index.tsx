@@ -170,19 +170,24 @@ const Main: React.FC = () => {
       <Title>Manage Profiles on Github</Title>
       <Form ref={formRef} onSubmit={handleSubmit}>
         <Input
+          data-testid="user-input"
           name="user"
           placeholder="Digite o nome do usuário"
           type="text"
           icon={FiUser}
           className="user-input"
         />
-        <Button type="submit" className="submit-button">
+        <Button
+          type="submit"
+          className="submit-button"
+          data-testid="button-submit"
+        >
           <FiSearch /> Find
         </Button>
       </Form>
       {!!Object.keys(user).length && !loading && (
         <>
-          <Profile>
+          <Profile data-testid="profile-section">
             <header>
               <img src={user.avatar_url} alt="" />
               <div>
