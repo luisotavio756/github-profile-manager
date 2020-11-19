@@ -69,7 +69,7 @@ const Main: React.FC = () => {
 
   const handleSubmit = useCallback(
     async (data: IFormData) => {
-      if (data.user.length === 0) {
+      if (data.user?.length === 0) {
         addToast({
           type: 'info',
           title: 'Field required!',
@@ -95,8 +95,6 @@ const Main: React.FC = () => {
         setUser(findUser.data);
 
         if (!address) {
-          setLoading(false);
-
           addToast({
             type: 'info',
             title: 'Address invalid or empty!',
@@ -106,51 +104,52 @@ const Main: React.FC = () => {
           return;
         }
 
-        Geocode.fromAddress(`${address}`)
-          .then(
-            response => {
-              const { lat, lng } = response.results[0].geometry.location;
+        await Geocode.fromAddress(`${address}`).then(
+          response => {
+            const { lat, lng } = response.results[0].geometry.location;
 
-              setPosition([lat, lng]);
-            },
-            error => {
-              addToast({
-                type: 'error',
-                title: 'Ocorreu um erro!',
-                description: 'Ocorreu um erro ao buscar o endereço do usuário',
-              });
-            },
-          )
-          .finally(() => {
-            setLoading(false);
-          });
+            setPosition([lat, lng]);
+          },
+          error => {
+            addToast({
+              type: 'error',
+              title: 'Error!',
+              description: 'Happen a error when search the user address.',
+            });
+          },
+        );
       } catch (error) {
-        setLoading(false);
-
         addToast({
           type: 'error',
-          title: 'Ocorreu um erro!',
+          title: 'Error!',
           description:
-            'Não foi possível buscar o usuário, verifique o nome de usuário e tente novamente.',
+            'Not was possible get the User profile, please, verify the username and try again.',
         });
+      } finally {
+        setLoading(false);
       }
     },
     [addToast],
   );
 
   useEffect(() => {
+    if (!process.env.REACT_APP_GOOGLE_MAPS_KEY) {
+      addToast({
+        type: 'info',
+        title: 'Maps Key is required!',
+        description:
+          'Please, set the REACT_APP_GOOGLE_MAPS_KEY environment variable',
+      });
+    }
     Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_KEY || '');
 
-    // set response language. Defaults to english.
     Geocode.setLanguage('en');
 
-    // set response region. Its optional.
-    // A Geocoding request with region=es (Spain) will return the Spanish city.
     Geocode.setRegion('es');
-  }, []);
+  }, [addToast]);
 
   return (
-    <Container>
+    <Container data-testid="container">
       <button
         className={`button-switch-theme switch-to-${theme}`}
         type="button"
@@ -168,7 +167,7 @@ const Main: React.FC = () => {
       </button>
       <img src={Logo} alt="" />
       <Title>Manage Profiles on Github</Title>
-      <Form ref={formRef} onSubmit={handleSubmit}>
+      <Form ref={formRef} onSubmit={handleSubmit} data-testid="form">
         <Input
           data-testid="user-input"
           name="user"
@@ -287,7 +286,7 @@ const Main: React.FC = () => {
           </MapView>
         </>
       )}
-      {loading && <div className="loading" />}
+      {loading && <div className="loading" data-testid="loading" />}
     </Container>
   );
 };
