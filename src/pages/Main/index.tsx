@@ -89,35 +89,33 @@ const Main: React.FC = () => {
           `/users/${data.user}/starred`,
         );
 
-        const address = findUser.data.location;
+        const address = findUser.data?.location;
 
         setStarredRepos(starred.data);
         setUser(findUser.data);
 
-        if (!address) {
+        if (address) {
+          await Geocode.fromAddress(`${address}`).then(
+            response => {
+              const { lat, lng } = response.results[0].geometry.location;
+
+              setPosition([lat, lng]);
+            },
+            error => {
+              addToast({
+                type: 'error',
+                title: 'Error!',
+                description: 'Happen a error when search the user address.',
+              });
+            },
+          );
+        } else {
           addToast({
             type: 'info',
             title: 'Address invalid or empty!',
             description: `Sorry! We can't search the user address with a invalid address stored by he.`,
           });
-
-          return;
         }
-
-        await Geocode.fromAddress(`${address}`).then(
-          response => {
-            const { lat, lng } = response.results[0].geometry.location;
-
-            setPosition([lat, lng]);
-          },
-          error => {
-            addToast({
-              type: 'error',
-              title: 'Error!',
-              description: 'Happen a error when search the user address.',
-            });
-          },
-        );
       } catch (error) {
         addToast({
           type: 'error',
@@ -166,12 +164,12 @@ const Main: React.FC = () => {
         )}
       </button>
       <img src={Logo} alt="" />
-      <Title>Manage Profiles on Github</Title>
+      <Title>Find Profiles on Github</Title>
       <Form ref={formRef} onSubmit={handleSubmit} data-testid="form">
         <Input
           data-testid="user-input"
           name="user"
-          placeholder="Digite o nome do usuário"
+          placeholder="Enter the Github username"
           type="text"
           icon={FiUser}
           className="user-input"
