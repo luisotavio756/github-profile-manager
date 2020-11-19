@@ -18,6 +18,7 @@ export default createGlobalStyle<IBodyProps>`
   }
 
   body {
+    transition: background 0.2s linear;
     background:${({ theme }) => theme.background};
     -webkit-font-smoothing: antialiased;
   }
@@ -27,10 +28,12 @@ export default createGlobalStyle<IBodyProps>`
   }
 
   h1, h2, h3, h4, h5, h6, strong {
+    transition: color 0.2s linear;
     color: ${({ theme }) => theme.title};
   }
 
   p, span, a {
+    transition: color 0.2s linear;
     color: ${({ theme }) => theme.text};
   }
 

@@ -4,7 +4,7 @@ export const lightTheme = {
   body: '#E2E2E2',
   title: '#3a3a3a',
   text: '#737390',
-  background: `#F0F0F5 url(${githubBackground}) no-repeat 70% top`,
+  background: `#e1e1e1 url(${githubBackground}) no-repeat 70% top`,
 };
 
 export const darkTheme = {
