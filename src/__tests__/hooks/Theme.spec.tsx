@@ -4,7 +4,7 @@ import { useTheme, ThemeProvider } from '../../hooks/theme';
 
 describe('Theme hook', () => {
   it('should be hable to switch theme', async () => {
-    const { result, waitForNextUpdate } = renderHook(() => useTheme(), {
+    const { result } = renderHook(() => useTheme(), {
       wrapper: ThemeProvider,
     });
 
