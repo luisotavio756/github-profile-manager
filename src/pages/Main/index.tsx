@@ -69,7 +69,7 @@ const Main: React.FC = () => {
 
   const handleSubmit = useCallback(
     async (data: IFormData) => {
-      if (data.user) {
+      if (data.user.length === 0) {
         addToast({
           type: 'info',
           title: 'Field required!',
