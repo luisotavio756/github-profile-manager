@@ -1,5 +1,5 @@
 <h1 align="center">
-   Gihub Profile Manager
+  Gihub Profile Manager
 </h1>
 <h4 align="center">
   This project was developed only from merge concepts of the ReactJS with TypeScript and the Gitub API.
@@ -27,6 +27,8 @@
 
 
 ## :information_source: How To Use
+
+**NOTE**: Before start application, rename the .env-example to .env and set the GOOGLE_MAPS environment variable.
 
 ```bash
 # Clone this repository
