@@ -9,7 +9,7 @@
 
 ## Requirements
 
-- Should be able enter a Github name and get User data and Starred repositories;
+- Should be able get User data and Starred repositories;
 - Should be able show the User location in a Map;
 - Should be able star a especific repository listed;
 - Should be able toggle theme.
