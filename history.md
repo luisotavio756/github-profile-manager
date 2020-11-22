@@ -27,6 +27,7 @@
     - Polished;
     - React Router DOM;
     - React Geolocation.
+    - Testing Library
 - [x]  Define colors and fonts
     - Font: Century Gothic
     - Colors:
