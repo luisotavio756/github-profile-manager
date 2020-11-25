@@ -3,20 +3,15 @@ import Geocode from 'react-geocode';
 
 import GitHubButton from 'react-github-btn';
 import {
-  FiAlignLeft,
-  FiBook,
   FiChevronRight,
-  FiLink,
   FiMoon,
   FiSearch,
   FiStar,
   FiSun,
   FiUser,
-  FiUserCheck,
-  FiUsers,
 } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
-import { Title, Form, Profile, Container, StarredRepos } from './styles';
+import { Title, Form, Container, StarredRepos } from './styles';
 import Logo from '../../assets/img/logo.svg';
 import api from '../../services/api';
 import { useToast } from '../../hooks/toast';
@@ -24,6 +19,7 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import { useTheme } from '../../hooks/theme';
 import Map from './Map';
+import Profile from './Profile';
 
 interface IUser {
   name: string;
@@ -177,45 +173,7 @@ const Main: React.FC = () => {
       </Form>
       {!!Object.keys(user).length && !loading && (
         <>
-          <Profile data-testid="profile-section">
-            <header>
-              <img src={user.avatar_url} alt="" />
-              <div>
-                <div className="name">
-                  <strong>{user.name}</strong>
-                  <p>{user.login}</p>
-                </div>
-                <p>
-                  <FiAlignLeft />
-                  {user.bio || 'Without description'}
-                </p>
-                <a href={user.html_url} target="_blank" rel="noreferrer">
-                  <FiLink /> {user.html_url}
-                </a>
-              </div>
-            </header>
-            <ul>
-              <li>
-                <strong>
-                  <FiUsers />
-                  {user.followers}
-                </strong>
-                <span>Follows</span>
-              </li>
-              <li>
-                <strong>
-                  <FiUserCheck /> {user.following}
-                </strong>
-                <span>Following</span>
-              </li>
-              <li>
-                <strong>
-                  <FiBook /> {user.public_repos}
-                </strong>
-                <span>Public Repos</span>
-              </li>
-            </ul>
-          </Profile>
+          <Profile user={user} data-testid="profile-section" />
           <StarredRepos theme={theme}>
             <h1>
               <FiStar /> Starred Repositories
