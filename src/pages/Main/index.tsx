@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Geocode from 'react-geocode';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+
 import GitHubButton from 'react-github-btn';
 import {
   FiAlignLeft,
   FiBook,
   FiChevronRight,
   FiLink,
-  FiMapPin,
   FiMoon,
   FiSearch,
   FiStar,
@@ -17,20 +16,14 @@ import {
   FiUsers,
 } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
-import {
-  Title,
-  Form,
-  Profile,
-  Container,
-  StarredRepos,
-  MapView,
-} from './styles';
+import { Title, Form, Profile, Container, StarredRepos } from './styles';
 import Logo from '../../assets/img/logo.svg';
 import api from '../../services/api';
 import { useToast } from '../../hooks/toast';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import { useTheme } from '../../hooks/theme';
+import Map from './Map';
 
 interface IUser {
   name: string;
@@ -261,27 +254,7 @@ const Main: React.FC = () => {
               </div>
             )}
           </StarredRepos>
-          <MapView>
-            <h1>
-              <FiMapPin /> Location
-            </h1>
-            <MapContainer
-              center={position}
-              zoom={13}
-              scrollWheelZoom={false}
-              style={{ height: 200 }}
-            >
-              <TileLayer
-                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
-              <Marker position={position}>
-                <Popup>
-                  A pretty CSS3 popup. <br /> Easily customizable.
-                </Popup>
-              </Marker>
-            </MapContainer>
-          </MapView>
+          <Map position={position} />
         </>
       )}
       {loading && <div className="loading" data-testid="loading" />}
