@@ -120,12 +120,13 @@ const Main: React.FC = () => {
         description:
           'Please, set the REACT_APP_GOOGLE_MAPS_KEY environment variable',
       });
+    } else {
+      Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_KEY || '');
+
+      Geocode.setLanguage('en');
+
+      Geocode.setRegion('es');
     }
-    Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_KEY || '');
-
-    Geocode.setLanguage('en');
-
-    Geocode.setRegion('es');
   }, [addToast]);
 
   return (

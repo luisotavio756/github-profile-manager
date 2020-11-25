@@ -2,7 +2,7 @@
   Gihub Profile Manager
 </h1>
 <h4 align="center">
-  This project was developed only from merge concepts of the ReactJS with TypeScript and the Gitub API.
+  This project was developed only from merge concepts of the ReactJS with TypeScript and the Github API.
 </h4>
 <p align="center">
 	<img src="https://res.cloudinary.com/luisotavio756/image/upload/v1605792429/Captura_de_tela_de_2020-11-19_10-25-34_ppgn95.png" />
